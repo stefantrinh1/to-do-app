@@ -1,15 +1,11 @@
 import React from "react";
 
 class AddOption extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addToList = this.addToList.bind(this);
-    this.state = {
-      error: undefined
-    };
-  }
+  state = {
+    error: undefined
+  };
 
-  addToList(e) {
+  addToList = e => {
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
     e.target.elements.option.value = "";
@@ -25,7 +21,8 @@ class AddOption extends React.Component {
         };
       }
     });
-  }
+  };
+
   render() {
     return (
       <div>

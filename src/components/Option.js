@@ -1,13 +1,9 @@
 import React from "react";
 
 class Option extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  removeItem(item) {
+  removeItem = item => {
     this.props.removeOption(item);
-  }
+  };
 
   render() {
     let listOptions = this.props.state.options.map((option, index) => (

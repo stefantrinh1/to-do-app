@@ -4,48 +4,49 @@ import Action from "./Action";
 import AddOption from "./AddOption";
 import Options from "./Options";
 import RemoveAll from "./RemoveAll";
+import OptionModal from "./Modal";
 
 class ToDoApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addItem = this.addItem.bind(this);
-    this.removeAll = this.removeAll.bind(this);
-    this.chooseOption = this.chooseOption.bind(this);
-    this.removeOption = this.removeOption.bind(this);
-    let stringData = [];
+  state = {
+    options: []
+  };
 
+  // method to choose an option
+  chooseOption = () => {
+    var chosenOption = this.state.options;
+    OptionModal();
+    // alert(
+    //   "I recommend doing this today: " +
+    //     chosenOption[Math.floor(Math.random() * chosenOption.length)]
+    // );
+  };
+
+  componentDidMount = () => {
+    let stringData = [];
     let pulledData = localStorage.getItem("options");
+    console.log(pulledData);
     if (pulledData !== null) {
       stringData = this.props.options.concat(JSON.parse(pulledData));
     }
+    this.setState(prevState => {
+      return {
+        options: stringData
+      };
+    });
+  };
 
-    this.state = {
-      options: stringData
-    };
-  }
-  // method to choose an option
-  chooseOption() {
-    var chosenOption = this.state.options;
-    alert(
-      "I recommend doing this today: " +
-        chosenOption[Math.floor(Math.random() * chosenOption.length)]
-    );
-  }
-
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate = (prevProps, prevState) => {
     if (prevState.options.length !== this.state.options.length) {
       const optionData = JSON.stringify(this.state.options);
       localStorage.setItem("options", optionData);
     }
-  }
+  };
 
-  componentWillUnmount() {}
+  componentWillUnmount = () => {};
 
   // method relates to the add option class
   // indexOf finds if there is a match. and if there is the index will be greater than 0
-  addItem(item) {
+  addItem = item => {
     if (!item) {
       return "invalid. please enter an option";
     } else if (this.state.options.indexOf(item) > -1) {
@@ -57,18 +58,18 @@ class ToDoApp extends React.Component {
         options: prevState.options.concat([item])
       };
     });
-  }
+  };
 
   // method relates to RemoveAll class
-  removeAll() {
+  removeAll = () => {
     this.setState(() => ({ options: [] }));
-  }
+  };
 
-  removeOption(option) {
+  removeOption = option => {
     this.setState(() => ({
       options: this.state.options.filter(i => i !== option)
     }));
-  }
+  };
 
   render() {
     const title = "Welcome To Your To Do Application";
