@@ -1,9 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 
-const OptionModal = () => {
-  //   return <div>I am a Modal</div>;
-};
+const OptionModal = props => (
+        <Modal 
+        isOpen={
+        !!props.selectedOption
+        }
+        onRequestClose={props.closeModal}
+        contentLabel="Selected Option"><h3>The action you will take today is: {props.selectedOption}</h3>
+        <button
+          name="option"
+          onClick={
+            props.closeModal
+          }>
+          Close
+        </button>
+</Modal>
+   
+)
 
 export default OptionModal;

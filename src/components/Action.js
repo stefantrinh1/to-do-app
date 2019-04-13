@@ -1,7 +1,6 @@
 import React from "react";
 
-const Action = props => {
-  return (
+const Action = props => (
     <div>
       <button
         disabled={props.state.options.length === 0}
@@ -11,5 +10,4 @@ const Action = props => {
       </button>
     </div>
   );
-};
 export default Action;

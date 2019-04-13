@@ -5,16 +5,24 @@ import AddOption from "./AddOption";
 import Options from "./Options";
 import RemoveAll from "./RemoveAll";
 import OptionModal from "./Modal";
+import Modal from "react-modal";
 
 class ToDoApp extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption:undefined
   };
 
   // method to choose an option
   chooseOption = () => {
-    var chosenOption = this.state.options;
-    OptionModal();
+    let Options = this.state.options;
+    let chosenOption = Options[Math.floor(Math.random() * Options.length)]
+    this.setState(prevState => {
+      return {
+        selectedOption: chosenOption
+      };
+    });
+  
     // alert(
     //   "I recommend doing this today: " +
     //     chosenOption[Math.floor(Math.random() * chosenOption.length)]
@@ -24,10 +32,10 @@ class ToDoApp extends React.Component {
   componentDidMount = () => {
     let stringData = [];
     let pulledData = localStorage.getItem("options");
-    console.log(pulledData);
     if (pulledData !== null) {
       stringData = this.props.options.concat(JSON.parse(pulledData));
     }
+    
     this.setState(prevState => {
       return {
         options: stringData
@@ -42,7 +50,9 @@ class ToDoApp extends React.Component {
     }
   };
 
-  componentWillUnmount = () => {};
+  componentWillMount = () => {
+    Modal.setAppElement('body');
+  };
 
   // method relates to the add option class
   // indexOf finds if there is a match. and if there is the index will be greater than 0
@@ -70,6 +80,12 @@ class ToDoApp extends React.Component {
       options: this.state.options.filter(i => i !== option)
     }));
   };
+  
+  closeModal = () => {
+    this.setState(() => ({
+      selectedOption: undefined
+    }));
+  };
 
   render() {
     const title = "Welcome To Your To Do Application";
@@ -82,6 +98,7 @@ class ToDoApp extends React.Component {
         <AddOption state={this.state} addOption={this.addItem} />
         <Action state={this.state} chooseOption={this.chooseOption} />
         <RemoveAll state={this.state} removeAll={this.removeAll} />
+        <OptionModal state={this.state} closeModal={this.closeModal} selectedOption={this.state.selectedOption} contentLabel="Selected Option" />
         {/* <RemoveOption state={this.state} removeOption={this.removeOption} /> */}
       </div>
     );
