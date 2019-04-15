@@ -1,3 +1,85 @@
-.add__option {
-    
+// Control Panel - Buttons and Entries
+
+// Add Option To List Styling
+
+.add__option {}
+
+.add__option .error-message {
+    padding: 0px 10px 10px;
+    margin: 0;
+    color: darkred;
+}
+
+.add__option form {
+    display: flex;
+    padding: 20px 10px 2px;
+}
+
+.add__option form input {
+    border: 1px solid grey;
+    width: 100%;
+    margin-right: 10px;
+}
+
+
+.add__option form button {
+    cursor: pointer;
+    background-color: unset;
+    margin: 0 2px 0 auto;
+    border-radius: 100%;
+    padding: 10px;
+    border: 0;
+    background: purple;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-size: 1em;
+    text-align: center;
+    vertical-align: middle;
+    flex: none;
+}
+
+// Action Button - Choose a Task
+
+.action__btn {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    border: solid 1px black;
+    box-sizing: border-box;
+    background: purple;
+    padding: 10px;
+    margin: 10px 0px;
+    color: white;
+
+}
+
+.action__btn button {
+    color: white;
+    font-size: 2em;
+    background-color: unset;
+    border: 0;
+}
+
+
+// Remove All Button
+
+.removeAll__btn {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    border: solid 1px black;
+    box-sizing: border-box;
+    background: purple;
+    padding: 10px;
+    margin: 10px 0px;
+    color: white;
+}
+
+
+.removeAll__btn button {
+    font-size: 2em;
+    color: white;
+    background-color: unset;
+    border: 0;
 }

@@ -1,14 +1,15 @@
-.list__container{
+.list__container {
     font-size: 2em;
     margin: 0;
     list-style-position: inside;
     padding: 0;
 }
 
-.list__option:nth-child(odd){
+.list__option:nth-child(odd) {
     background: $lightgrey;
 }
-.list__option:nth-child(even){
+
+.list__option:nth-child(even) {
     background: $grey;
 }
 
@@ -18,29 +19,30 @@
     padding: 10px;
     align-items: center;
     border-radius: 20px;
-    
+
 }
-.list__option li{
-    font-weight: bold;  
+
+.list__option li {
+    font-weight: bold;
 }
 
 .remove__button {
     cursor: pointer;
     background-color: unset;
-    display: inline-block;
     margin: 0 2px 0 auto;
     border-radius: 100%;
     padding: 10px;
     border: 0;
     background: purple;
     color: white;
-    width: 45px;
-    height: 45px;
-    font-size: 1em;
+    width: 30px;
+    height: 30px;
+    font-size: 0.5em;
     text-align: center;
     vertical-align: middle;
     flex: none;
 }
+
 .remove__button:hover {
     background: rgb(73, 36, 73);
     color: lightgrey;
