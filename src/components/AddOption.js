@@ -25,7 +25,7 @@ class AddOption extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="add__option">
         <form onSubmit={this.addToList}>
           <p>{this.state.error}</p>
           <input type="text" name="option" />

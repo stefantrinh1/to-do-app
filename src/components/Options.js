@@ -2,7 +2,7 @@ import React from "react";
 import Option from "./Option";
 
 const Options = props => (
-    <ul>
+    <ul className="list__container">
       <Option state={props.state} removeOption={props.removeOption} />
     </ul>
   )

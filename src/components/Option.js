@@ -7,15 +7,15 @@ class Option extends React.Component {
 
   render() {
     let listOptions = this.props.state.options.map((option, index) => (
-      <div key={"option" + (parseInt(index) + 1)}>
+      <div className="list__option" key={"option" + (parseInt(index) + 1)}>
         <li> {option} </li>{" "}
-        <button
+        <button className="remove__button"
           name="option"
           onClick={() => {
             this.removeItem(option);
           }}
         >
-          Remove
+          X
         </button>
       </div>
     ));

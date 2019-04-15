@@ -1,0 +1,17 @@
+.header__container{
+    background: $brand-color;
+    border-bottom: 1px black solid;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    
+    .header__title{
+        margin: 10px 0px;
+
+    }
+    .header__subtitle{
+        margin: 10px 0px;
+        color: $off-brand-color;
+    }
+
+}

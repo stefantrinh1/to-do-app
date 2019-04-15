@@ -94,10 +94,10 @@ class ToDoApp extends React.Component {
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Options state={this.state} removeOption={this.removeOption} />
         <AddOption state={this.state} addOption={this.addItem} />
         <Action state={this.state} chooseOption={this.chooseOption} />
         <RemoveAll state={this.state} removeAll={this.removeAll} />
+        <Options state={this.state} removeOption={this.removeOption} />
         <OptionModal state={this.state} closeModal={this.closeModal} selectedOption={this.state.selectedOption} contentLabel="Selected Option" />
         {/* <RemoveOption state={this.state} removeOption={this.removeOption} /> */}
       </div>
