@@ -88,8 +88,8 @@ class ToDoApp extends React.Component {
   };
 
   render() {
-    const title = "Welcome To Your To Do Application";
-    const subtitle = "Create A Do List and Let The Computer Pick Your Actions";
+    const title = "Task Manager";
+    const subtitle = "Create A List of Tasks To Track";
 
     return (
       <div className="to-do-app">

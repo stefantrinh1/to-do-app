@@ -8,8 +8,8 @@ const Header = props => (
 );
 
 Header.defaultProps = {
-  title: "Indecision",
-  subtitle: "Choose what you want to do today."
+  title: "Task Manager",
+  subtitle: "Create A List of Tasks To Track"
 };
 
 export default Header;
