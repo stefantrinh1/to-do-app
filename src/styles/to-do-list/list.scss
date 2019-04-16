@@ -25,6 +25,8 @@
 .list__option li {
     font-weight: bold;
     text-transform: capitalize;
+    word-break: break-all;
+
 }
 
 .remove__button {

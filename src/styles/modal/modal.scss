@@ -44,6 +44,8 @@
     width: 100%;
     font-weight: bold;
     font-style: italic;
+    word-break: break-all;
+
 }
 
 .modal .selectedTask::before,
