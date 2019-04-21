@@ -1,7 +1,7 @@
 import React from "react";
 
 const Action = props => (
-  <div className="action__btn">
+  <div className="large__btn action__btn">
     <button
       disabled={props.state.options.length === 0}
       onClick={props.chooseOption}

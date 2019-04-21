@@ -5,18 +5,32 @@ class Option extends React.Component {
     this.props.removeOption(item);
   };
 
+  completeTask = task => {
+    this.props.completeTask(task);
+  }
+
   render() {
     let listOptions = this.props.state.options.map((option, index) => (
       <div className="list__option" key={"option" + (parseInt(index) + 1)}>
         <li> {option} </li>{" "}
-        <button className="remove__button"
-          name="option"
-          onClick={() => {
-            this.removeItem(option);
-          }}
-        >
-          X
+        <div className="optionButtons">
+          <button className="optionButton complete__button"
+            name="option"
+            onClick={() => {
+              this.completeTask(option);
+            }}
+          >
+            ✔
         </button>
+          <button className="optionButton remove__button"
+            name="option"
+            onClick={() => {
+              this.removeItem(option);
+            }}
+          >
+            X
+        </button>
+        </div>
       </div>
     ));
 

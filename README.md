@@ -12,7 +12,7 @@
 - Your data never leaves your machine
 - Quick and easy to use
 
-## Desciption
+## Description
 
 A simple and quick Task Manager Application that lets you note down and store, your task list in the broswer. The tasks remain saved as long as the cache is not erased. The application uses local storage to store your tasks.
 <br>

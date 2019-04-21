@@ -29,7 +29,20 @@
 
 }
 
-.remove__button {
+.sub__listContainer h2{
+    margin: 20px 0px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    background: $brand-color;
+
+}
+
+.optionButtons{
+    margin-left: auto;
+}
+
+.optionButton{
     cursor: pointer;
     background-color: unset;
     margin: 0 2px 0 auto;
@@ -44,9 +57,15 @@
     text-align: center;
     vertical-align: middle;
     flex: none;
+
+}
+
+.complete__button:hover {
+    background: rgb(73, 36, 73);
+    color: lightgreen;
 }
 
 .remove__button:hover {
     background: rgb(73, 36, 73);
-    color: lightgrey;
+    color: red;
 }

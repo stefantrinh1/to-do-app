@@ -1,16 +1,17 @@
 import React from "react";
 import Header from "./Header";
-import Action from "./Action";
+import ControlPanel from "./ControlPanel"
 import AddOption from "./AddOption";
 import Options from "./Options";
-import RemoveAll from "./RemoveAll";
 import OptionModal from "./Modal";
 import Modal from "react-modal";
+import CompletedTasks from "./CompletedTasks"
 
 class ToDoApp extends React.Component {
   state = {
     options: [],
-    selectedOption: undefined
+    selectedOption: undefined,
+    archived:[]
   };
 
   // method to choose an option
@@ -22,23 +23,24 @@ class ToDoApp extends React.Component {
         selectedOption: chosenOption
       };
     });
-
-    // alert(
-    //   "I recommend doing this today: " +
-    //     chosenOption[Math.floor(Math.random() * chosenOption.length)]
-    // );
   };
 
   componentDidMount = () => {
-    let stringData = [];
-    let pulledData = localStorage.getItem("options");
-    if (pulledData !== null) {
-      stringData = this.props.options.concat(JSON.parse(pulledData));
+    let optionData = [];
+    let pulledOptionData = localStorage.getItem("options");
+    if (pulledOptionData !== null) {
+      optionData = this.props.options.concat(JSON.parse(pulledOptionData));
+    }
+    let archivedData = [];
+    let pulledArchivedData = localStorage.getItem("archived");
+    if (pulledArchivedData !== null) {
+      archivedData = this.props.options.concat(JSON.parse(pulledArchivedData));
     }
 
     this.setState(prevState => {
       return {
-        options: stringData
+        options: optionData,
+        archived:archivedData
       };
     });
   };
@@ -48,6 +50,20 @@ class ToDoApp extends React.Component {
       const optionData = JSON.stringify(this.state.options);
       localStorage.setItem("options", optionData);
     }
+
+    if (prevState.archived.length !== this.state.archived.length) {
+      const archivedData = JSON.stringify(this.state.archived);
+      localStorage.setItem("archived",archivedData);
+    }
+    const controlPanel = document.querySelector(".controlPanel");
+    if(this.state.options.length === 0){
+      controlPanel.style.display = "none";
+    }
+    else{
+      controlPanel.style.display = "flex";
+    }
+  
+
   };
 
   componentWillMount = () => {
@@ -70,6 +86,13 @@ class ToDoApp extends React.Component {
     });
   };
 
+  completeTask = task => {
+    this.setState(prevState => ({
+        options: this.state.options.filter(i => i !== task),
+        archived: prevState.archived.concat([task]),
+      } ))
+  };
+
   // method relates to RemoveAll class
   removeAll = () => {
     this.setState(() => ({ options: [] }));
@@ -78,6 +101,12 @@ class ToDoApp extends React.Component {
   removeOption = option => {
     this.setState(() => ({
       options: this.state.options.filter(i => i !== option)
+    }));
+  };
+
+  removeCompleted = task => {
+    this.setState(() => ({
+      archived: this.state.archived.filter(i => i !== task)
     }));
   };
 
@@ -95,9 +124,9 @@ class ToDoApp extends React.Component {
       <div className="to-do-app">
         <Header title={title} subtitle={subtitle} />
         <AddOption state={this.state} addOption={this.addItem} />
-        <Action state={this.state} chooseOption={this.chooseOption} />
-        <RemoveAll state={this.state} removeAll={this.removeAll} />
-        <Options state={this.state} removeOption={this.removeOption} />
+        <ControlPanel state={this.state} chooseOption={this.chooseOption}  removeAll={this.removeAll} />
+        <Options state={this.state} completeTask={this.completeTask} removeOption={this.removeOption} />
+        <CompletedTasks state={this.state} removeCompleted={this.removeCompleted} />
         <OptionModal
           state={this.state}
           closeModal={this.closeModal}
