@@ -1,25 +1,37 @@
 import React from "react";
 
 class CompletedTask extends React.Component {
-  removeTask = item => {
-    this.props.removeCompleted(item);
+
+    state = {
+        value: this.props.value
+    }
+
+  removeTask = task => {
+    this.props.removeCompleted(task);
+    this.setState(()=>{
+        value:undefined;
+    })
   };
+  editTask = task => {
+    console.log(task);
+  };
+
   render() {
-    let listCompleted = this.props.state.archived.map((completed, index) => (
-      <div className="list__option" key={"completed" + (parseInt(index) + 1)}>
-        <li> {completed} </li>{" "}
+    return (
+      <div className="list__option" key={"completed"}>
+        <li><textarea name="task" value={this.state.value} onChange={() => {
+        this.editTask("new value")}
+        }/></li>{" "}
         <button className="optionButton remove__button"
           name="completedtask"
           onClick={() => {
-            this.removeTask(completed);
+            this.removeTask(this.state.value);
           }}
         >
           X
         </button>
       </div>
-    ));
-
-    return listCompleted;
+    );
   }
 }
 

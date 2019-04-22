@@ -1,14 +1,17 @@
 import React from "react";
 import Option from "./Option";
 
-const Options = props => (
+class Options extends React.Component {
+
+render() {
+  console.log("inside options class: "+this.props.state.options)
+  let listOptions =  this.props.state.options.map((option, index) => (
   <div className="sub__listContainer">
-    <h2>Task List</h2>
-    <ul className="list__container">
-      <Option state={props.state} completeTask={props.completeTask} removeOption={props.removeOption} />
-    </ul>
-  </div>
-)
+      <Option state={this.props.state} value={option} editTask={this.props.editTask} completeTask={this.props.completeTask} removeOption={this.props.removeOption} />
+  </div>));
+  return listOptions;
+}
+}
 
 
 export default Options;

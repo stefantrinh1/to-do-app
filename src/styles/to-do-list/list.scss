@@ -1,32 +1,45 @@
-.list__container {
-    font-size: 2em;
-    margin: 0;
-    list-style-position: inside;
-    padding: 0;
+.sub__listContainer{
+    border-radius: 20px;
+    padding: 5px;
 }
 
-.list__option:nth-child(odd) {
+.sub__listContainer:nth-child(odd) {
     background: $lightgrey;
 }
 
-.list__option:nth-child(even) {
+.sub__listContainer:nth-child(even) {
     background: $grey;
 }
 
 .list__option {
     display: flex;
+    flex-wrap: nowrap;
     align-content: center;
-    padding: 10px;
     align-items: center;
-    border-radius: 20px;
 
 }
 
-.list__option li {
+.list__option textarea {
+    border: none;
+    background: transparent;
+    font-size: 2em;
+    vertical-align: middle;
+    height: auto;
+    flex-grow: 1;
+    margin: 0px 10px;
+    resize: none;
     font-weight: bold;
-    text-transform: capitalize;
-    word-break: break-all;
+    overflow:hidden;
 
+}
+
+.list__option textarea:focus {
+    border: solid 1px black;
+    background: $off-white;
+}
+
+.list__option input {
+    display: none;
 }
 
 .sub__listContainer h2{

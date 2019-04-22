@@ -50,6 +50,12 @@ class ToDoApp extends React.Component {
       const optionData = JSON.stringify(this.state.options);
       localStorage.setItem("options", optionData);
     }
+    console.log("after update before storage state is: "+ this.state.options)
+
+    // if (prevState.options !== this.state.options) {
+    //   const optionData = JSON.stringify(this.state.options);
+    //   localStorage.setItem("options", optionData);
+    // }
 
     if (prevState.archived.length !== this.state.archived.length) {
       const archivedData = JSON.stringify(this.state.archived);
@@ -62,7 +68,11 @@ class ToDoApp extends React.Component {
     else{
       controlPanel.style.display = "flex";
     }
+    console.log(this.state)
+
+
   
+    console.log("after update state is: "+ this.state.options)
 
   };
 
@@ -73,6 +83,7 @@ class ToDoApp extends React.Component {
   // method relates to the add option class
   // indexOf finds if there is a match. and if there is the index will be greater than 0
   addItem = item => {
+    console.log("add item run")
     if (!item) {
       return "Invalid Entry. Please Enter An Option";
     } else if (this.state.options.indexOf(item) > -1) {
@@ -86,7 +97,18 @@ class ToDoApp extends React.Component {
     });
   };
 
+  // editTask = (newTask, prevTask) => {
+  //   console.log("edit task has run")
+  //   let deletePrevTask = this.state.options.filter(i => i !== prevTask);
+  //   let newTaskList = deletePrevTask.concat([newTask]);
+  //   this.setState(() => ({
+  //     options: newTaskList
+  //   }));
+  // }
+
   completeTask = task => {
+    console.log("complete task has run");
+    
     this.setState(prevState => ({
         options: this.state.options.filter(i => i !== task),
         archived: prevState.archived.concat([task]),
@@ -95,11 +117,15 @@ class ToDoApp extends React.Component {
 
   // method relates to RemoveAll class
   removeAll = () => {
-    this.setState(() => ({ options: [] }));
+    this.setState((prevState) => ({ options: [] }));
   };
 
   removeOption = option => {
-    this.setState(() => ({
+    console.log("The state before removal inside of function"+this.state.options)
+    console.log("option to remove: "+ option)
+    console.log(this.state.options.filter(i => i !== option));
+    
+    this.setState((prevState) => ({
       options: this.state.options.filter(i => i !== option)
     }));
   };
@@ -125,7 +151,9 @@ class ToDoApp extends React.Component {
         <Header title={title} subtitle={subtitle} />
         <AddOption state={this.state} addOption={this.addItem} />
         <ControlPanel state={this.state} chooseOption={this.chooseOption}  removeAll={this.removeAll} />
-        <Options state={this.state} completeTask={this.completeTask} removeOption={this.removeOption} />
+        <div>Tasks</div>
+        <Options state={this.state} editTask={this.editTask} completeTask={this.completeTask} removeOption={this.removeOption} />
+        <div>CompletedTasks</div>
         <CompletedTasks state={this.state} removeCompleted={this.removeCompleted} />
         <OptionModal
           state={this.state}
@@ -133,7 +161,6 @@ class ToDoApp extends React.Component {
           selectedOption={this.state.selectedOption}
           contentLabel="Selected Option"
         />
-        {/* <RemoveOption state={this.state} removeOption={this.removeOption} /> */}
       </div>
     );
   }

@@ -1,14 +1,17 @@
 import React from "react";
 import CompletedTask from "./CompletedTask";
 
-const CompletedTasks = props => (
-    <div className="sub__listContainer">
-        <h2>Completed Tasks</h2>
-        <ul className="list__container">
-            <CompletedTask state={props.state} removeCompleted={props.removeCompleted} />
-        </ul>
+class CompletedTasks extends React.Component {
+
+render() {
+    let listCompleted = this.props.state.archived.map((completed, index) => (
+    <div className="sub__listContainer list__container">
+            <CompletedTask state={this.props.state} value={completed} removeCompleted={this.props.removeCompleted} />
     </div>
-  )
+    ))
+    return listCompleted;
+}
+}
 
 
 export default CompletedTasks;

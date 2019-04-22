@@ -1,7 +1,6 @@
 
 import React from "react";
 import Action from "./Action";
-import RemovalAll from "./RemoveAll"
 import RemoveAll from "./RemoveAll";
 
 const ControlPanel = props => (
