@@ -2,18 +2,19 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 class Option extends React.Component {
-  
-    state = {
-      editing: false,
-      prevValue: this.props.value,
-      value: this.props.value
-    }
- 
+
+  state = {
+    // editing: false,
+    // prevValue: this.props.value,
+    // value: this.props.value
+  }
+
 
   componentDidMount() {
     //adjusts the height of the text areas for responsive text rows
-    var textarea = document.querySelector('textarea');
+    var textarea = document.querySelector("textarea");
     textarea.addEventListener('keydown', autosize);
+
     function autosize() {
       var el = this;
       setTimeout(function () {
@@ -24,8 +25,8 @@ class Option extends React.Component {
   }
 
   removeItem = item => {
-    console.log("inside remove item:"+ item)
-    
+    console.log("inside remove item:" + item)
+
     this.props.removeOption(item);
   };
 
@@ -35,53 +36,48 @@ class Option extends React.Component {
 
 
   handleChange(event) {
-    // // adds or removes an event handler outside of component
-    // if (!this.state.editing) {
+    
+    // if (this.state.editing === false) {
     //   // attach/remove event handler
-    //   document.addEventListener('click', this.handleSubmit, false);
+    //   document.addEventListener('click',()=>{this.handleSubmit(event)}, false);
     // } else {
-    //   document.removeEventListener('click', this.handleSubmit, false);
+    //   document.removeEventListener('click',()=>{this.handleSubmit(event)}, false);
     // }
 
-    // this.setState(prevState => {
-    //   return {
-    //     value: event.target.value
-    //   }
-    // })
-    console.log("handle change run");
-    
+    // if (this.node.contains(event.target)){
+    //   return
+    // }
+    console.log("handle change hit")
+
   }
 
-  handleSubmit = (event, prevState) => {
-    // if (this.node.contains(event.target)) {
-    //   return;
-    // }
-
-    // event.preventDefault();
-    // this.props.editTask(this.state.value, this.state.prevValue)
-    // if (this.state.value !== this.state.prevValue) {
-    //   this.setState({
-    //     prevValue: this.state.value,  
-    //   })
-    // } else {
-    //   console.log("Value is the same. No action needed");
-    // }
-    console.log("handle submit run");
-    
+  handleSubmit = (event) => {
+    // console.log("handlesubmit active")
+    // console.log(event.target.value);
+    // // console.log(this.state.prevValue);
+    // this.setState(prevState => ({
+    //   editing: !prevState.editing,
+    //   prevValue: prevState.value,
+    //   value: event.target.value
+    // }));
+    // this.props.editTask(event.target.value, this.state.prevValue);
+    console.log("testing")
   }
+
+
 
 
   render() {
     return (
       <div ref={node => { this.node = node; }} className="list__option" key={"option"}>
-        <textarea name="task" value={this.state.value} onChange={() => { this.handleChange(event) }} />
+        <textarea name="task" typeof='text' defaultValue={this.props.value} onChange={() => { this.handleChange(event) }} />
         <input type="submit" value="Save" onClick={() => { this.handleSubmit(event) }} />
         <div className="optionButtons">
 
           <button className="optionButton complete__button"
             name="option"
             onClick={() => {
-              this.completeTask(this.state.value);
+              this.completeTask(this.props.value);
             }}
           >
             ✓
@@ -90,8 +86,8 @@ class Option extends React.Component {
           <button className="optionButton remove__button"
             name="option"
             onClick={() => {
-              console.log("value before removal:" + this.state.value)
-              this.removeItem(this.state.value);
+              console.log("value before removal:" + this.props.value)
+              this.removeItem(this.props.value);
             }}
           >
             X

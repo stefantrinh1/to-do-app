@@ -6,6 +6,7 @@ import Options from "./Options";
 import OptionModal from "./Modal";
 import Modal from "react-modal";
 import CompletedTasks from "./CompletedTasks"
+import SubHeader from "./SubHeader"
 
 class ToDoApp extends React.Component {
   state = {
@@ -50,17 +51,16 @@ class ToDoApp extends React.Component {
       const optionData = JSON.stringify(this.state.options);
       localStorage.setItem("options", optionData);
     }
-    console.log("after update before storage state is: "+ this.state.options)
 
-    // if (prevState.options !== this.state.options) {
-    //   const optionData = JSON.stringify(this.state.options);
-    //   localStorage.setItem("options", optionData);
-    // }
-
-    if (prevState.archived.length !== this.state.archived.length) {
-      const archivedData = JSON.stringify(this.state.archived);
-      localStorage.setItem("archived",archivedData);
+    if (prevState.options !== this.state.options) {
+      const optionData = JSON.stringify(this.state.options);
+      localStorage.setItem("options", optionData);
     }
+
+    // if (prevState.archived.length !== this.state.archived.length) {
+    //   const archivedData = JSON.stringify(this.state.archived);
+    //   localStorage.setItem("archived",archivedData);
+    // }
     const controlPanel = document.querySelector(".controlPanel");
     if(this.state.options.length === 0){
       controlPanel.style.display = "none";
@@ -68,12 +68,6 @@ class ToDoApp extends React.Component {
     else{
       controlPanel.style.display = "flex";
     }
-    console.log(this.state)
-
-
-  
-    console.log("after update state is: "+ this.state.options)
-
   };
 
   componentWillMount = () => {
@@ -83,7 +77,7 @@ class ToDoApp extends React.Component {
   // method relates to the add option class
   // indexOf finds if there is a match. and if there is the index will be greater than 0
   addItem = item => {
-    console.log("add item run")
+   
     if (!item) {
       return "Invalid Entry. Please Enter An Option";
     } else if (this.state.options.indexOf(item) > -1) {
@@ -97,17 +91,20 @@ class ToDoApp extends React.Component {
     });
   };
 
-  // editTask = (newTask, prevTask) => {
-  //   console.log("edit task has run")
-  //   let deletePrevTask = this.state.options.filter(i => i !== prevTask);
-  //   let newTaskList = deletePrevTask.concat([newTask]);
-  //   this.setState(() => ({
-  //     options: newTaskList
-  //   }));
-  // }
+  editTask = (newTask, prevTask) => {
+    console.log("edit task has run")
+    let deletePrevTask = this.state.options.filter(i => i !== prevTask);
+    console.log("previous task: "+ prevTask);
+    console.log(deletePrevTask);
+    
+    let newTaskList = deletePrevTask.concat([newTask]);
+    this.setState(() => ({
+      options: newTaskList
+    }));
+  }
 
   completeTask = task => {
-    console.log("complete task has run");
+    
     
     this.setState(prevState => ({
         options: this.state.options.filter(i => i !== task),
@@ -120,11 +117,10 @@ class ToDoApp extends React.Component {
     this.setState((prevState) => ({ options: [] }));
   };
 
-  removeOption = option => {
-    console.log("The state before removal inside of function"+this.state.options)
-    console.log("option to remove: "+ option)
-    console.log(this.state.options.filter(i => i !== option));
-    
+  removeOption = option => { 
+    console.log("option passed into removeOption"+option)
+    console.log("this.state.options before removeOption setstate"+this.state.options)
+    console.log("state filter"+this.state.options.filter(i => i !== option))
     this.setState((prevState) => ({
       options: this.state.options.filter(i => i !== option)
     }));
@@ -151,9 +147,9 @@ class ToDoApp extends React.Component {
         <Header title={title} subtitle={subtitle} />
         <AddOption state={this.state} addOption={this.addItem} />
         <ControlPanel state={this.state} chooseOption={this.chooseOption}  removeAll={this.removeAll} />
-        <div>Tasks</div>
+        <SubHeader subHeading="Tasks" />
         <Options state={this.state} editTask={this.editTask} completeTask={this.completeTask} removeOption={this.removeOption} />
-        <div>CompletedTasks</div>
+        <SubHeader subHeading="Completed Tasks" />
         <CompletedTasks state={this.state} removeCompleted={this.removeCompleted} />
         <OptionModal
           state={this.state}
