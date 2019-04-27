@@ -6,7 +6,9 @@
 }
 
 // Add Option To List Styling
-
+.add__option {
+width: 100%;
+}
 .add__option .error-message {
     padding: 0px 10px 10px;
     margin: 0;
@@ -14,22 +16,19 @@
 }
 
 .add__option form {
-    display: -webkit-box;
-    display: -ms-flexbox;
+    padding: 10px 0px;
+    width: 100%;
     display: flex;
-    padding: 10px;
-    margin: 10px;
+    justify-content: flex-end;
+    
 }
 
 .add__option form input {
     border: 1px solid grey;
-    width: 100%;
-    margin-right: 10px;
     font-size: 2.5em;
     line-height: 1.5;
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    flex: 1;
+    margin: 0 10px;
 }
 
 
@@ -47,9 +46,7 @@
     font-size: $lg-size;
     text-align: center;
     vertical-align: middle;
-    -webkit-box-flex: 0;
-        -ms-flex: none;
-            flex: none;
+
 }
 
 // Action Button - Choose a Task
