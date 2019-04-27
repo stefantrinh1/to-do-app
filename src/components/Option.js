@@ -1,14 +1,12 @@
 import React from "react";
-import PropTypes from 'prop-types';
 
 class Option extends React.Component {
 
   state = {
-    // editing: false,
-    // prevValue: this.props.value,
-    // value: this.props.value
+    editing: false,
+    prevValue: this.props.value,
+    value: this.props.value,
   }
-
 
   componentDidMount() {
     //adjusts the height of the text areas for responsive text rows
@@ -24,71 +22,68 @@ class Option extends React.Component {
     }
   }
 
+  // send task to remove to top parent component
   removeItem = item => {
-    console.log("inside remove item:" + item)
-
     this.props.removeOption(item);
   };
 
+   // send task to complete to top parent component
   completeTask = task => {
     this.props.completeTask(task);
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    // once the component has been exited from focus and updated removes
+    // the event listener to stop further clicking
+    document.removeEventListener('click', this.handleSubmit, false);
+    console.log("Option Component Updated");
 
+  }
+
+  // when the textarea for the tasks detects a change it activates
+  // and event
   handleChange(event) {
-    
-    // if (this.state.editing === false) {
-    //   // attach/remove event handler
-    //   document.addEventListener('click',()=>{this.handleSubmit(event)}, false);
-    // } else {
-    //   document.removeEventListener('click',()=>{this.handleSubmit(event)}, false);
-    // }
-
-    // if (this.node.contains(event.target)){
-    //   return
-    // }
-    console.log("handle change hit")
-
+    // once editing has been activated
+    document.addEventListener('click', this.handleSubmit, false);
+    if (this.optionNode.contains(event.target)) {
+      return
+    }
   }
-
+// takes the changed value and prev value once the user has clicked away from the component
   handleSubmit = (event) => {
-    // console.log("handlesubmit active")
-    // console.log(event.target.value);
-    // // console.log(this.state.prevValue);
-    // this.setState(prevState => ({
-    //   editing: !prevState.editing,
-    //   prevValue: prevState.value,
-    //   value: event.target.value
-    // }));
-    // this.props.editTask(event.target.value, this.state.prevValue);
-    console.log("testing")
+    this.setState(() => ({
+      editing: true,
+    }));
+    this.props.editTask(this.optionNode.firstChild.value, this.state.prevValue)
+
   }
-
-
-
 
   render() {
     return (
-      <div ref={node => { this.node = node; }} className="list__option" key={"option"}>
-        <textarea name="task" typeof='text' defaultValue={this.props.value} onChange={() => { this.handleChange(event) }} />
-        <input type="submit" value="Save" onClick={() => { this.handleSubmit(event) }} />
+      <div ref={optionNode => { this.optionNode = optionNode; }} className="list__option">
+        <textarea
+          name="task"
+          typeof='text'
+          defaultValue={this.props.value}
+          onChange={() => { this.handleChange(event) }}
+        />
+        <input
+          type="submit"
+          value="Save"
+          onClick={() => { this.handleSubmit(event) }}
+        />
         <div className="optionButtons">
 
           <button className="optionButton complete__button"
             name="option"
-            onClick={() => {
-              this.completeTask(this.props.value);
-            }}
+            onClick={() => { this.completeTask(this.props.value); }}
           >
             ✓
           </button>
 
           <button className="optionButton remove__button"
             name="option"
-            onClick={() => {
-              console.log("value before removal:" + this.props.value)
-              this.removeItem(this.props.value);
-            }}
+            onClick={() => { this.removeItem(this.props.value); }}
           >
             X
         </button>

@@ -10,6 +10,7 @@ class AddOption extends React.Component {
     const option = e.target.elements.option.value.trim();
     e.target.elements.option.value = "";
     let error = this.props.addOption(option);
+
     this.setState(() => {
       if (error) {
         return {
@@ -26,11 +27,20 @@ class AddOption extends React.Component {
   render() {
     return (
       <div className="add__option">
+
         <form onSubmit={this.addToList}>
-          <input placeholder="Enter Task To List" type="text" name="option" />
+
+          <input
+            placeholder="Enter Task To List"
+            type="text" name="option"
+          />
+
           <button>+</button>
+          
         </form>
+
         <p className="error-message">{this.state.error}</p>
+
       </div>
     );
   }

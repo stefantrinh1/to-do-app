@@ -8,8 +8,8 @@ const Header = props => (
 );
 
 Header.defaultProps = {
-  title: "Task Manager",
-  subtitle: "Create A List of Tasks To Track"
+  title: "Pearldrop Handmade",
+  subtitle: "Hand made pearls designed with passion."
 };
 
 export default Header;
