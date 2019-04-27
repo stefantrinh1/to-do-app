@@ -14,8 +14,11 @@
 }
 
 .add__option form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    padding: 20px 10px 2px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .add__option form input {
@@ -24,13 +27,16 @@
     margin-right: 10px;
     font-size: 2.5em;
     line-height: 1.5;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
 }
 
 
 .add__option form button {
     cursor: pointer;
     background-color: unset;
-    margin: 0 2px 0 auto;
+    margin: 10px;
     border-radius: 100%;
     padding: 10px;
     border: 0;
@@ -41,7 +47,9 @@
     font-size: $lg-size;
     text-align: center;
     vertical-align: middle;
-    flex: none;
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
 }
 
 // Action Button - Choose a Task
@@ -49,7 +57,8 @@
 .large__btn {
     width: 50%;
     text-align: center;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     background: purple;
     padding: 10px;
     margin: 1vw;
