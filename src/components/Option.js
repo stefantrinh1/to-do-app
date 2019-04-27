@@ -1,4 +1,5 @@
 import React from "react";
+import Textarea from 'react-textarea-autosize';
 
 class Option extends React.Component {
 
@@ -9,17 +10,7 @@ class Option extends React.Component {
   }
 
   componentDidMount() {
-    //adjusts the height of the text areas for responsive text rows
-    var textarea = document.querySelector("textarea");
-    textarea.addEventListener('keydown', autosize);
-
-    function autosize() {
-      var el = this;
-      setTimeout(function () {
-        el.style.cssText = 'height:auto; padding:0';
-        el.style.cssText = 'height:' + el.scrollHeight + 'px';
-      }, 0);
-    }
+ 
   }
 
   // send task to remove to top parent component
@@ -27,7 +18,7 @@ class Option extends React.Component {
     this.props.removeOption(item);
   };
 
-   // send task to complete to top parent component
+  // send task to complete to top parent component
   completeTask = task => {
     this.props.completeTask(task);
   }
@@ -49,7 +40,7 @@ class Option extends React.Component {
       return
     }
   }
-// takes the changed value and prev value once the user has clicked away from the component
+  // takes the changed value and prev value once the user has clicked away from the component
   handleSubmit = (event) => {
     this.setState(() => ({
       editing: true,
@@ -61,7 +52,7 @@ class Option extends React.Component {
   render() {
     return (
       <div ref={optionNode => { this.optionNode = optionNode; }} className="list__option">
-        <textarea
+        <Textarea
           name="task"
           typeof='text'
           defaultValue={this.props.value}

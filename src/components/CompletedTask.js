@@ -1,4 +1,5 @@
 import React from "react";
+import Textarea from 'react-textarea-autosize';
 
 class CompletedTask extends React.Component {
 
@@ -9,17 +10,7 @@ class CompletedTask extends React.Component {
   }
 
   componentDidMount() {
-    //adjusts the height of the text areas for responsive text rows
-    var textarea = document.querySelector("textarea");
-    textarea.addEventListener('keydown', autosize);
 
-    function autosize() {
-      var el = this;
-      setTimeout(function () {
-        el.style.cssText = 'height:auto; padding:0';
-        el.style.cssText = 'height:' + el.scrollHeight + 'px';
-      }, 0);
-    }
   }
 
   removeTask = task => {
@@ -49,7 +40,7 @@ class CompletedTask extends React.Component {
     return (
       <div ref={completedNode => { this.completedNode = completedNode; }} className="list__option" key={"completed"}>
 
-        <textarea
+        <Textarea
           name="task"
           defaultValue={this.props.value}
           onChange={() => { this.handleChange(event) }}
