@@ -19,7 +19,7 @@ class ToDoApp extends React.Component {
   chooseOption = () => {
     let Options = this.state.options;
     let chosenOption = Options[Math.floor(Math.random() * Options.length)];
-    this.setState(prevState => {
+    this.setState(() => {
       return {
         selectedOption: chosenOption
       };
