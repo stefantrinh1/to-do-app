@@ -28,7 +28,11 @@ module.exports = {
   
   plugins: [
     new HtmlWebpackPlugin({
-      template: __dirname + '/src/index.html'
+      template: __dirname + '/src/index.html',
+      meta: {
+        viewpoint: "width=device-width, initial-scale=1",
+        description:"Task Manger to organise your tasks."
+      }
     })
   ]
 }
